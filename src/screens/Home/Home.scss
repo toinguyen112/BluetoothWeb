@@ -1,0 +1,171 @@
+.app {
+    // display: flex;
+    // width: 1200px;
+    // padding: 10px 0;
+    // margin: 0 auto;
+    // background-color: red;
+
+    // .header {
+    //     height: 100px;
+    //     background-color: #fff;
+    //     display: flex;
+    //     padding: 10px 165px;
+    //     justify-content: space-between;
+    //     align-items: center;
+
+
+    //     &__left {
+    //         height: 100%;
+
+    //         .logo {
+    //             width: 100px;
+    //             height: 100%;
+    //         }
+    //     }
+
+    //     &__right {
+    //         display: flex;
+    //         align-items: center;
+
+    //         &-icon {
+    //             // width: 30px;
+    //             // height: 30px;
+
+    //             margin-right: 20px;
+
+    //             &>i {
+    //                 color: $main-color;
+    //                 font-size: 25px;
+    //             }
+    //         }
+
+    //         &-text {
+    //             font-size: 16px;
+    //             color: #333;
+
+    //             &:hover {
+    //                 color: $main-color;
+    //                 cursor: pointer;
+    //             }
+    //         }
+    //     }
+    // }
+
+    .main {
+        background-color: #f5f5f5;
+        height: 100vh;
+
+        .grid {
+            max-width: 1200px;
+            display: block;
+            padding: 0;
+            margin: 0 auto;
+
+            &__row {
+                display: flex;
+                flex-wrap: wrap;
+                padding-top: 40px;
+
+                .grid__column-2 {
+                    width: 16.666%;
+                    // background-color: red;
+                    // padding: 20px;
+
+                    &-cate {
+                        // padding: 20px;
+                        padding-right: 10px;
+
+                        .active {
+                            color: #fff;
+                        }
+
+                        &>li:nth-child(2) {
+                            margin-top: 10px;
+                        }
+
+                        &>li {
+                            padding: 10px;
+                            background-color: $main-color;
+                            text-align: center;
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: #333;
+                            border-radius: 10px;
+                            transition: all 0.2s ease-in;
+
+                            &:hover {
+                                color: #fff;
+                                cursor: pointer;
+                                transform: translateX(-5px);
+                            }
+                        }
+                    }
+                }
+
+                .grid__column-10 {
+                    width: 83.334%;
+                    // background-color: green;
+                    padding: 0 10px 10px 10px;
+
+                    .onTop {
+                        background-color: $main-color;
+
+                        &>li {
+                            font-weight: 600;
+                            color: #fff;
+                        }
+                    }
+
+                    &-list {
+                        width: 100%;
+                        display: flex;
+                        padding: 10px;
+                        align-items: center;
+                        background-color: #fff;
+                        border-radius: 10px;
+                        margin-bottom: 10px;
+
+                        // justify-content: space-around;
+                        &>li:nth-child(1) {
+                            width: 30%;
+                        }
+
+                        &>li:nth-child(2) {
+                            width: 20%;
+                        }
+
+                        &>li:nth-child(3) {
+                            width: 15%;
+                        }
+
+                        &>li:nth-child(4) {
+                            width: 40%;
+                        }
+
+                        &>li {
+                            font-size: 14px;
+                            // border-right: 1px solid #333;
+
+                            .btn-func {
+                                padding: 5px 10px;
+                                background-color: $main-color;
+                                border-radius: 8px;
+                                align-items: center;
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: #fff;
+                                }
+                            }
+
+                        }
+
+
+                    }
+                }
+            }
+
+
+        }
+    }
+}

@@ -1,0 +1,10 @@
+@import "./base.scss";
+@import "./mixins";
+@import "./variables";
+
+@import "../screens/Login/Login.scss";
+@import "../screens/Home/Home.scss";
+@import "../components/Modal/Modal.scss";
+@import "../components/Header/Header.scss";
+@import "../components/SideBar/SideBar.scss";
+@import "../components/PatientList/PatientList.scss";

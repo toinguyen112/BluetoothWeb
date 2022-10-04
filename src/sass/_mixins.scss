@@ -1,0 +1,18 @@
+@import "./variables";
+
+@mixin flex($align-item, $justify-content) {
+    display: flex;
+    align-items: $align-item;
+    justify-content: $justify-content;
+}
+
+@mixin btn {
+    background: $main-color;
+    // border-radius: 12px;
+    padding: 8px 12px;
+    border: 0;
+    outline: 0;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+}

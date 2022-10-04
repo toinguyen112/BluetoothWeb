@@ -1,0 +1,66 @@
+.patients {
+    flex-basis: 80%;
+    height: calc(100vh - 100px);
+    position: sticky;
+    top: 100px;
+    margin-left: 50px;
+    margin-top: 10px;
+
+    .onTop {
+        background-color: $main-color;
+
+        &>li {
+            font-weight: 600;
+            color: #fff;
+        }
+    }
+
+    &-list {
+        width: 100%;
+        display: flex;
+        padding: 10px;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 10px;
+        margin-bottom: 10px;
+
+        // justify-content: space-around;
+        &>li:nth-child(1) {
+            width: 30%;
+        }
+
+        &>li:nth-child(2) {
+            width: 20%;
+        }
+
+        &>li:nth-child(3) {
+            width: 15%;
+        }
+
+        &>li:nth-child(4) {
+            width: 40%;
+        }
+
+        &>li {
+            font-size: 14px;
+            // border-right: 1px solid #333;
+
+            .btn-func {
+                padding: 5px 10px;
+                background-color: $main-color;
+                border-radius: 8px;
+                align-items: center;
+                cursor: pointer;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+
+        }
+
+
+    }
+
+
+}

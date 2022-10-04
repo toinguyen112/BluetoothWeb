@@ -1,0 +1,77 @@
+@import "./mixins";
+
+// Scrollbar css
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #93cd01;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #5085f6;
+}
+
+// Scrollbar css
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+
+    user-select: none;
+}
+
+html {
+    // font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+    // font-family: "SFProText", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+button,
+.btn {
+    border: none;
+    cursor: pointer;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1300px;
+    padding: 0 50px;
+    margin: 0 auto;
+
+    // @include tab {
+    //     padding: 0 20px;
+    // }
+
+    // @include mb {
+    //     padding: 0 10px;
+    // }
+}

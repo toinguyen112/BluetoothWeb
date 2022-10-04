@@ -1,0 +1,30 @@
+.sidebar {
+    flex-basis: 15%;
+    height: calc(100vh - 100px);
+    position: sticky;
+    top: 100px;
+
+
+    &__list {
+
+
+
+        &-item {
+            padding: 10px;
+            background-color: $main-color;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            border-radius: 10px;
+            transition: all 0.2s ease-in;
+            margin-top: 10px;
+
+            &:hover {
+                color: #fff;
+                cursor: pointer;
+                transform: translateX(-5px);
+            }
+        }
+    }
+}
