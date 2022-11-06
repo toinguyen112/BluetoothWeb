@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import logo from '../../assets/logo/logo.jpg'
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutAdmin, deleteWarning } from '../../actions/adminAction';
+import { logoutAdmin, deleteWarning, createWarning } from '../../actions/adminAction';
 import { useNavigate } from 'react-router-dom'
 import Axios from 'axios'
 import Moment from 'react-moment'
 import Header from '../../components/Header'
 import SideBar from '../../components/SideBar'
 import PatientList from '../../components/PatientList'
+import notify from '../../assets/notify/notify.mp3';
+import { ToastContainer, toast } from 'react-toastify';
+
+
+import io from "socket.io-client";
 
 
 
 const Home = () => {
 
     document.title = 'Trang chủ';
+    // const patientID = '633a5ae296527a92165c510d';
     const cates = [
         {
             'id': 1,
@@ -34,26 +40,39 @@ const Home = () => {
     const [modal, setModal] = useState(false);
     const [warning, setWarning] = useState({});
     const [detailPatient, setDetailPatient] = useState();
+    // const [reWarnings, setReWarnings] = useState([]);
 
+    // connect to server socket
+    useEffect(() => {
+        const socket = io.connect("http://localhost:5001");
+        socket.on('send-web', (data) => {
+            // document.querySelector('body').focus();
+            console.log(data);
+            handleAddWarning(data);
+            playAudio();
+        })
+    }, [])
+
+    const playAudio = () => {
+        const audio = document.querySelector('#audio');
+        audio.src = notify;
+        audio.play();
+        toast.warn("Có bệnh nhân ra khỏi khu vực");
+    }
 
 
     useEffect(() => {
-
         setAdminInfor(localStorage.getItem('adminInfor'));
-        // if (localStorage.getItem('adminInfor')) {
-
-        //     Axios.defaults.headers.common['authorization'] = `Bearer ${localStorage.getItem('adminInfor').token}`;
-
-        // }
         (
             async () => {
+                // Axios.defaults.headers.common['authorization'] = `Bearer ${JSON.parse(localStorage.getItem('adminInfor')).token}`;
                 const { data } = await Axios.get('/api/patients'
-                    //     ,
-                    //     {
-                    //         headers: {
-                    //             authorization: `Bearer ${adminInfor.token}`
-                    //         }
-                    //     }
+                    ,
+                    {
+                        headers: {
+                            authorization: `Bearer ${JSON.parse(localStorage.getItem('adminInfor')).token}`
+                        }
+                    }
                 );
                 setPatients(data);
             }
@@ -61,34 +80,18 @@ const Home = () => {
         (
             async () => {
                 const { data } = await Axios.get('/api/warnings'
-                    // ,
-                    // {
-                    //     headers: {
-                    //         authorization: `Bearer ${adminInfor.token}`
-                    //     }
-                    // }
+                    ,
+                    {
+                        headers: {
+                            authorization: `Bearer ${JSON.parse(localStorage.getItem('adminInfor')).token}`
+                        }
+                    }
                 );
-                setWarnings(data);
+                setWarnings(data.reverse());
+                // setReWarnings(data.reverse());
             }
         )();
     }, []);
-
-    // useEffect(() => {
-    //     if (adminInfor) {
-    //         (
-    //             async () => {
-    //                 const { data } = await Axios.get('/api/patients');
-    //                 setPatients(data);
-    //             }
-    //         )();
-    //         (
-    //             async () => {
-    //                 const { data } = await Axios.get('/api/warnings');
-    //                 setWarnings(data);
-    //             }
-    //         )();
-    //     }
-    // }, [adminInfor])
 
 
     useEffect(() => {
@@ -101,10 +104,36 @@ const Home = () => {
         getPatient();
     }, [warning]);
 
+
+    // test add warning
+    const handleAddWarning = async (patientID) => {
+        dispatch(createWarning(patientID));
+        // toast.warn('Có bệnh nhân ra khỏi khu vực');
+        const { data } = await Axios.get('/api/warnings'
+            ,
+            {
+                headers: {
+                    authorization: `Bearer ${JSON.parse(localStorage.getItem('adminInfor')).token}`
+                }
+            }
+        );
+        setWarnings(data.reverse());
+    }
+
     const deleteHandler = (id) => async () => {
+
         dispatch(deleteWarning(id));
-        const { data } = await Axios.get('/api/warnings');
-        setWarnings(data);
+        const { data } = await Axios.get('/api/warnings'
+            ,
+            {
+                headers: {
+                    authorization: `Bearer ${JSON.parse(localStorage.getItem('adminInfor')).token}`
+                }
+            }
+        );
+        setWarnings(data.reverse());
+        // setReWarnings(data.reverse());
+        // console.log(data);
     }
 
 
@@ -142,10 +171,13 @@ const Home = () => {
                 </div>
             </div> */}
             <Header />
+            <ToastContainer />
             <div className="main">
                 <div className="grid wide">
                     <div className="grid__row app__content">
                         <div className="grid__column-2">
+                            <audio id="audio" />
+
                             <ul className="grid__column-2-cate">
                                 {
                                     cates.map((item, index) => (
@@ -166,6 +198,7 @@ const Home = () => {
                             cateId === 1 ?
                                 (<div className="grid__column-10">
                                     <ul className="grid__column-10-list onTop ">
+                                        <li>STT</li>
                                         <li>Số Căn cước</li>
                                         <li>Họ tên</li>
                                         <li>Số điện thoại</li>
@@ -176,6 +209,7 @@ const Home = () => {
                                         (
                                             patients.map((patient, index) => (
                                                 <ul key={index} className="grid__column-10-list">
+                                                    <li>{index + 1}</li>
                                                     <li>{patient.cccd}</li>
                                                     <li>{patient.name}</li>
                                                     <li>{patient.phone}</li>
@@ -188,6 +222,7 @@ const Home = () => {
                                 : (
                                     <div className="grid__column-10">
                                         <ul className="grid__column-10-list onTop ">
+                                            <li>STT</li>
                                             <li>Ngày giờ</li>
                                             <li>Chức năng</li>
 
@@ -197,6 +232,7 @@ const Home = () => {
                                             (
                                                 warnings.map((warning, index) => (
                                                     <ul key={index} className="grid__column-10-list">
+                                                        <li>{index + 1}</li>
                                                         <li><Moment format='MMMM Do YYYY, h:mm:ss a'>{warning.dateTime}</Moment></li>
                                                         <li><span className="btn-func" onClick={() => {
                                                             toggleModal();
@@ -206,6 +242,7 @@ const Home = () => {
                                                             <span className="btn-func" onClick={deleteHandler(warning._id)}>
                                                                 Xóa
                                                             </span>
+
                                                         </li>
                                                     </ul>
                                                 ))
@@ -274,6 +311,7 @@ const Home = () => {
                                 <button className="close-modal" onClick={toggleModal}>
                                     X
                                 </button>
+
 
                             </div>
                         </div>

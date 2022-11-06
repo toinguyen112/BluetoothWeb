@@ -7,7 +7,7 @@ export const loginAdmin = (email, password) => async (dispatch) => {
         const { data } = await Axios.post('/api/admin/login', { email, password });
         dispatch({ type: ADMIN_LOGIN_SUCCESS, payload: data });
         // console.log('action: ', data);
-        Axios.defaults.headers.common['authorization'] = `Bearer ${data.token}`;
+        // Axios.defaults.headers.common['authorization'] = `Bearer ${data.token}`;
         localStorage.setItem('adminInfor', JSON.stringify(data));
     } catch (error) {
         dispatch({
@@ -27,6 +27,14 @@ export const logoutAdmin = () => (dispatch) => {
 export const deleteWarning = (id) => async (dispatch) => {
     try {
         await Axios.delete(`/api/warnings/delete/${id}`);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const createWarning = (patientID) => async (dispatch) => {
+    try {
+        await Axios.post('/api/warnings/create', { patientID: patientID });
     } catch (error) {
         console.log(error);
     }

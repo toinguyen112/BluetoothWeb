@@ -127,19 +127,23 @@
 
                         // justify-content: space-around;
                         &>li:nth-child(1) {
-                            width: 30%;
+                            width: 10%;
                         }
 
                         &>li:nth-child(2) {
-                            width: 20%;
+                            width: 25%;
                         }
 
                         &>li:nth-child(3) {
-                            width: 15%;
+                            width: 20%;
                         }
 
                         &>li:nth-child(4) {
-                            width: 40%;
+                            width: 15%;
+                        }
+
+                        &>li:nth-child(5) {
+                            width: 35%;
                         }
 
                         &>li {

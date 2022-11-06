@@ -17,6 +17,11 @@
         }
     }
 
+    &__center {
+        font-family: $font-title;
+        color: #333;
+    }
+
     &__right {
         display: flex;
         align-items: center;

@@ -26,6 +26,11 @@ const Header = () => {
             <div className="header__left">
                 <img src={logo} alt="Logo" className="logo" />
             </div>
+            <div className="header__center">
+                <h1>
+                    Theo dõi bệnh nhân
+                </h1>
+            </div>
             <div className="header__right">
                 <div className="header__right-icon">
                     <i class="fa-solid fa-user"></i>
