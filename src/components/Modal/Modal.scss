@@ -82,6 +82,15 @@ body.active-modal {
     }
 }
 
+.left-add {
+    flex-basis: 30%;
+
+    &>li {
+        // color: $main-color;
+        margin-top: 20px;
+    }
+}
+
 .modal__infor-right {
 
     // background-color: yellow;
@@ -89,6 +98,36 @@ body.active-modal {
 
     &>li {
         margin-top: 15px;
+
+        input {
+            padding: 5px 10px;
+            outline: none;
+            width: 300px;
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
     }
+
+}
+
+
+.addBtn {
+    padding: 5px 10px;
+    background-color: $main-color;
+    border-radius: 8px;
+    align-items: center;
+    cursor: pointer;
+    // font-family: $main-font;
+    font-size: 14px;
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+.addBtnm {
+    margin-top: 5%;
+    margin-bottom: 2%;
+    margin-left: 40%;
 
 }

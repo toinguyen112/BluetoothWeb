@@ -4,7 +4,7 @@ import { ADMIN_LOGIN_REQUEST, ADMIN_LOGIN_SUCCESS, ADMIN_LOGIN_FAIL, ADMIN_LOGOU
 export const loginAdmin = (email, password) => async (dispatch) => {
     dispatch({ type: ADMIN_LOGIN_REQUEST, payload: { email, password } });
     try {
-        const { data } = await Axios.post('/api/admin/login', { email, password });
+        const { data } = await Axios.post('/api/doctors/login', { email, password });
         dispatch({ type: ADMIN_LOGIN_SUCCESS, payload: data });
         // console.log('action: ', data);
         // Axios.defaults.headers.common['authorization'] = `Bearer ${data.token}`;
@@ -35,6 +35,16 @@ export const deleteWarning = (id) => async (dispatch) => {
 export const createWarning = (patientID) => async (dispatch) => {
     try {
         await Axios.post('/api/warnings/create', { patientID: patientID });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+export const deletePatient = (id) => async (dispatch) => {
+    try {
+        await Axios.delete(`/api/patients/delete/${id}`);
     } catch (error) {
         console.log(error);
     }
